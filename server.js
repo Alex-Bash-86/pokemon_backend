@@ -3,7 +3,8 @@ import chalk from 'chalk';
 import cors from 'cors';
 import mongoose from 'mongoose';
 
-import "./db/index.js"; 
+//import "./db/index.js"; 
+import connectDB from './db/index.js';
 import leaderboardRoutes from "./routers/leaderboard.routes.js";
 import { errorHandler } from "./middlewares/index.js";
 
@@ -27,6 +28,18 @@ app.use('/{*splat}', (req, _res) => {
 
 app.use(errorHandler);
 
-app.listen(port, () => {
-  console.log(chalk.bgGreen(` Personal Library API listening on port ${port} `));
-});
+const startServer = async () => {
+  try {
+    await connectDB(); 
+    app.listen(port, () => {
+      console.log(chalk.bgGreen(`Server listening on port ${port}`));
+    });
+  } catch (err) {
+    console.log(chalk.bgRed('Failed to start server:'), err);
+    process.exit(1);
+  }
+};
+
+startServer();
+
+
