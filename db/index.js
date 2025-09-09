@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-import mongoose from "mongoose";
-
-const connectDB = async () => {
-  try {
-    const mongo = await mongoose.connect(process.env.MONGO_URI);
-    console.log(`DB conection to ${mongo.connection.name} was successful`);
-  } catch (error) {
-    console.log(error);
-    process.exit(1);
-  }
-};
-export default connectDB;
-=======
 import chalk from "chalk";
 import mongoose from "mongoose";
 
@@ -22,4 +8,3 @@ try {
   console.log(error);
   process.exit(1);
 }
->>>>>>> 207c226 (Server fertig)
