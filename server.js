@@ -4,7 +4,7 @@ import chalk from "chalk";
 import cors from "cors";
 import mongoose from "mongoose";
 import path from "path";
-import userRoutes from "./routers/user.routes.js";
+import authRouter from "./routers/user.routes.js";
 
 //import "./db/index.js";
 import connectDB from "./db/index.js";
@@ -25,7 +25,7 @@ app.use(
 );
 
 // set up a route specific middleware to handle all requests to all path starting with /auth
-app.use("/auth", authRoutes);
+app.use("/auth", authRouter);
 
 app.get("/health", async (_req, res) => {
   const { ok } = await mongoose.connection.db.admin().ping();
