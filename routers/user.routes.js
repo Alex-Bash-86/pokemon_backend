@@ -7,6 +7,6 @@ const authRouter = express.Router();
 authRouter.post("/register", register);
 authRouter.post("/login", login);
 //! Will be used frontend side to check if the user is logged in or not
-userRouter.get("/me", authenticate, getMe);
+authRouter.get("/me", authenticate, getMe);
 
 export default authRouter;
