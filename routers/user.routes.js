@@ -1,12 +1,18 @@
-import express from "express";
-import authenticate from "../middlewares/authenticate.js";
-import { register, login, getMe } from "../controllers/user.controller.js";
+import { Router } from "express";
+import { createUser, getAllUsers, getOneUser, updateOneUser, deleteUser } from "../controllers/user.controller.js";
 
-const authRouter = express.Router();
+import{ registerUser, login, logout } from "../controllers/auth.controllers.js";
+import { authenticate } from '../middlewares/index.js';
 
-authRouter.post("/register", register);
-authRouter.post("/login", login);
-//! Will be used frontend side to check if the user is logged in or not
-authRouter.get("/me", authenticate, getMe);
+const userRouter = Router();
 
-export default authRouter;
+userRouter.post("/", registerUser);
+userRouter.post("/login", login);
+userRouter.delete("/logout", logout);
+
+userRouter.get("/", authenticate, getAllUsers);
+userRouter.get("/:id", authenticate, getOneUser);
+userRouter.put("/:id", authenticate, updateOneUser);
+userRouter.delete("/:id", authenticate, deleteUser);
+
+export default userRouter;

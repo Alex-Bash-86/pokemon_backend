@@ -19,7 +19,7 @@ const authenticate = async (req, res, next) => {
 
     console.log("payload", payload);
     //
-    req.user = { _id: payload.id };
+    req.user = { _id: payload.id, role };
     next();
   } catch (error) {
     throw new Error("Invalid token", {
