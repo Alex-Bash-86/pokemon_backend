@@ -12,8 +12,8 @@ const getAllUsers = async (_req, res) => {
 };
 
 const getOneUser = async (req, res) => {
-  const { id } = req.params;
-  const user = await User.findById(id).populate('readingList.bookRefId');
+  const { _id } = req.params;
+  const user = await User.findById(_id);
   if (!user) throw new Error('User not found', { cause: 404 });
   res.json({ data: user });
 };
@@ -31,7 +31,6 @@ const deleteUser = async (req, res) => {
   if (!user) throw new Error('User not found', { cause: 404 });
   res.json({ data: user });
 };
-
 
 
 export { createUser, getAllUsers, getOneUser, updateOneUser, deleteUser };
