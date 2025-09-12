@@ -5,6 +5,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import path from "path";
 import authRouter from "./routers/user.routes.js";
+import userRouter from "./routers/user.routes.js";
 
 //import "./db/index.js";
 import connectDB from "./db/index.js";
@@ -17,6 +18,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use(cookieParser());
+
 app.use(
   cors({
     origin: true,
@@ -34,7 +36,10 @@ app.get("/health", async (_req, res) => {
 });
 
 app.use("/leaderboard", leaderboardRoutes);
+app.use('/users', userRouter);
+//app.use('/login', userRouter);
 
+// Handle 404 for all other routes  
 app.use("/{*splat}", (req, _res) => {
   throw new Error(`URL unavailable; you used ${req.originalUrl}`, {
     cause: 404

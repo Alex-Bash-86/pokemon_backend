@@ -14,7 +14,12 @@ const userSchema = new mongoose.Schema({
   },
   score: {
     type: Number,
-    required: true
+    //required: true
+  },
+  role: {
+    type: String,
+    enum: ['player', 'admin', 'superadmin'],
+    default: 'player'
   }
 });
 const User = mongoose.model("User", userSchema);
