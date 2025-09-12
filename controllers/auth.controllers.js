@@ -26,6 +26,7 @@ const registerUser = async (req, res) => {
 
     res.cookie('token', token, {
     httpOnly: true,
+    //httpOnly: false,
     secure,
     sameSite: 'lax',
     expires: new Date(Date.now() + parseInt(process.env.JWT_EXPIRES_IN_DAYS) * 24 * 60 * 60 * 1000),
@@ -54,6 +55,7 @@ const login = async (req, res) => {
 
     res.cookie('token', token, {
     httpOnly: true,
+    //httpOnly: false,
     secure,
     sameSite: 'lax',
     expires: new Date(Date.now() + parseInt(process.env.JWT_EXPIRES_IN_DAYS) * 24 * 60 * 60 * 1000),
@@ -65,15 +67,29 @@ const login = async (req, res) => {
 const logout = (req, res) => {
     res.clearCookie('token', {  
     httpOnly: true,
+    //httpOnly: false,
     secure,
     sameSite: 'lax'
     });
 
-    res.json({ message: 'Logout successful' });
+    res.json({ msg: 'Logout successful' });
+};
+
+const me = async (req, res) => {
+  // Sicherstellen, dass req.user existiert
+  if (!req.user) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  const { _id, role } = req.user;
+
+  const user = await User.findById(_id).lean();
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  res.json({ data: { _id: user._id, username: user.username, role } });
 };
 
 
-
-
-
-export { registerUser, login, logout };
+export { registerUser, login, logout, me };
