@@ -26,6 +26,10 @@ app.use(
   })
 );
 
+app.get("/", (req, res) => {
+  res.send("Willkommen bei der Pokémon API!");
+});
+
 // set up a route specific middleware to handle all requests to all path starting with /auth
 app.use("/auth", authRouter);
 
