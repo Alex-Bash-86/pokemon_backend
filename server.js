@@ -27,7 +27,7 @@ app.use(
 );
 
 app.get("/", (req, res) => {
-  res.send("Willkommen bei der Pokémon API!");
+  res.send("Willkommen bei der Pokemon Battle!");
 });
 
 // set up a route specific middleware to handle all requests to all path starting with /auth
@@ -44,11 +44,11 @@ app.use('/users', userRouter);
 //app.use('/login', userRouter);
 
 // Handle 404 for all other routes  
-app.use("/{*splat}", (req, _res) => {
-  throw new Error(`URL unavailable; you used ${req.originalUrl}`, {
-    cause: 404
-  });
-});
+//app.use("/{*splat}", (req, _res) => {
+//  throw new Error(`URL unavailable; you used ${req.originalUrl}`, {
+//    cause: 404
+//  });
+//});
 
 app.use(errorHandler);
 
