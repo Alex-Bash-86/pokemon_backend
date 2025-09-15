@@ -59,7 +59,6 @@ const updateUserScore = async (req, res) => {
   }
 };
 
-
 const updateScore = async (req, res) => {
   const { id } = req.params;
   const updatedEntry = await Leaderboard.findByIdAndUpdate(id, req.body, {
@@ -77,13 +76,11 @@ const deleteScore = async (req, res) => {
   res.json({ data: deletedEntry, message: "Eintrag erfolgreich gelöscht" });
 };
 
-
 export {
   getLeaderboard,
   getOneScore,
   createScore,
-  updateUserScore,
   updateScore,
   deleteScore,
+  updateUserScore
 };
-
