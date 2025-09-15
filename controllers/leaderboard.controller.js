@@ -59,7 +59,6 @@ const updateUserScore = async (req, res) => {
   }
 };
 
-
 const updateScore = async (req, res) => {
   const { id } = req.params;
   const updatedEntry = await Leaderboard.findByIdAndUpdate(id, req.body, {
@@ -70,30 +69,6 @@ const updateScore = async (req, res) => {
   res.json({ data: updatedEntry });
 };
 
-const updateUserScore = async (req, res) => {
-  try {
-    const { username, score } = req.body;
-    if (!username || typeof score !== "number") {
-      return res.status(400).json({ msg: "Username and score required" });
-    }
-    // Spieler suchen
-    let player = await Leaderboard.findOne({ username });
-    if (player) {
-      // Score addieren
-      player.score += score;
-      await player.save();
-      return res.json({ msg: "Score updated", data: player });
-    } else {
-      // neuen Spieler anlegen
-      const newPlayer = await Leaderboard.create({ username, score });
-      return res.json({ msg: "New player created", data: newPlayer });
-    }
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ msg: "Server error" });
-  }
-};
-
 const deleteScore = async (req, res) => {
   const { id } = req.params;
   const deletedEntry = await Leaderboard.findByIdAndDelete(id).lean();
@@ -101,23 +76,11 @@ const deleteScore = async (req, res) => {
   res.json({ data: deletedEntry, message: "Eintrag erfolgreich gelöscht" });
 };
 
-<<<<<<< HEAD
-=======
-
->>>>>>> f28bbb213d2a21f51d5d397a1db44bcb0927bcb3
 export {
   getLeaderboard,
   getOneScore,
   createScore,
-<<<<<<< HEAD
   updateScore,
   deleteScore,
   updateUserScore
 };
-=======
-  updateUserScore,
-  updateScore,
-  deleteScore,
-};
-
->>>>>>> f28bbb213d2a21f51d5d397a1db44bcb0927bcb3
