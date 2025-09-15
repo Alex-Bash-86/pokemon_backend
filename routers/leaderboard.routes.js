@@ -4,7 +4,8 @@ import {
   getOneScore,
   createScore,
   updateScore,
-  deleteScore
+  deleteScore,
+  updateUserScore
 } from "../controllers/leaderboard.controller.js";
 import { authenticate } from "../middlewares/index.js";
 import { hasRole } from "../middlewares/index.js";
@@ -19,6 +20,8 @@ leaderboardRouter.post(
   hasRole("self", "admin"),
   createScore
 );
+
+leaderboardRouter.post("/update", authenticate, updateUserScore);
 leaderboardRouter.put("/:id", authenticate, hasRole("admin"), updateScore);
 leaderboardRouter.delete("/:id", authenticate, hasRole("admin"), deleteScore);
 
