@@ -14,12 +14,13 @@ const userSchema = new mongoose.Schema({
   },
   score: {
     type: Number,
+    default: 0
     //required: true
   },
   role: {
     type: String,
-    enum: ['player', 'admin', 'superadmin'],
-    default: 'player'
+    enum: ["player", "admin", "superadmin"],
+    default: "player"
   }
 });
 const User = mongoose.model("User", userSchema);

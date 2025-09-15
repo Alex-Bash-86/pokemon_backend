@@ -5,16 +5,16 @@ const leaderboardSchema = new Schema({
   username: {
     type: String,
     required: true,
-    trim: true,
+    trim: true
   },
   score: {
     type: Number,
-    required: true,
+    required: true
   },
   date: {
     type: Date,
-    default: Date.now,
-  },
+    default: Date.now
+  }
 });
 
 const AutoIncrement = AutoIncrementFactory(mongoose);
