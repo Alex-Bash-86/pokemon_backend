@@ -45,7 +45,8 @@ const updateUserScore = async (req, res) => {
 
     if (player) {
       // Score addieren
-      player.score += score;
+
+      player.score = Number(player.score) + Number(score);
       await player.save();
       return res.json({ msg: "Score updated", data: player });
     } else {

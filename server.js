@@ -17,14 +17,16 @@ const port = process.env.PORT || 3000;
 
 app.use(
   cors({
-
     credentials: true,
-      origin: process.env.CLIENT_URL  || "http://localhost:5173",
+    /*  origin:
+      process.env.CLIENT_URL ||
+      "http://localhost:5173" ||
+      "http://localhost:4000" */
+    origin: "http://localhost:4000"
   })
 );
 app.use(cookieParser());
 app.use(express.json());
-
 
 app.get("/", (req, res) => {
   res.send("Willkommen bei der Pokemon Battle!");
@@ -43,14 +45,12 @@ app.use("/leaderboard", leaderboardRoutes);
 // app.use("/users", userRouter);
 //app.use('/login', userRouter);
 
-
 // Handle 404 for all other routes
 app.use("/{*splat}", (req, _res) => {
   throw new Error(`URL unavailable; you used ${req.originalUrl}`, {
     cause: 404
   });
 });
-
 
 app.use(errorHandler);
 
