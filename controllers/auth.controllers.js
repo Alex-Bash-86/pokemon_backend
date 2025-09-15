@@ -37,6 +37,7 @@ const registerUser = async (req, res) => {
 
   res.cookie("token", token, {
     httpOnly: true,
+    //httpOnly: false,
     secure,
     sameSite: "lax",
     expires: new Date(
@@ -76,6 +77,7 @@ const login = async (req, res) => {
 
   res.cookie("token", token, {
     httpOnly: true,
+    //httpOnly: false,
     secure,
     sameSite: "lax",
     expires: new Date(

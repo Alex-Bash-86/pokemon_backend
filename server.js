@@ -17,12 +17,19 @@ const port = process.env.PORT || 3000;
 
 app.use(
   cors({
+
     credentials: true,
-    origin: "http://localhost:4000"
+      origin: process.env.CLIENT_URL  || "http://localhost:5173",
   })
 );
 app.use(cookieParser());
 app.use(express.json());
+
+
+app.get("/", (req, res) => {
+  res.send("Willkommen bei der Pokemon Battle!");
+});
+
 // set up a route specific middleware to handle all requests to all path starting with /auth
 app.use("/users", userRouter);
 
@@ -36,12 +43,14 @@ app.use("/leaderboard", leaderboardRoutes);
 // app.use("/users", userRouter);
 //app.use('/login', userRouter);
 
+
 // Handle 404 for all other routes
 app.use("/{*splat}", (req, _res) => {
   throw new Error(`URL unavailable; you used ${req.originalUrl}`, {
     cause: 404
   });
 });
+
 
 app.use(errorHandler);
 
