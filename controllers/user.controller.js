@@ -13,10 +13,12 @@ const getAllUsers = async (_req, res) => {
 };
 
 const getOneUser = async (req, res) => {
+
   const { id } = req.params;
   console.log(chalk.bgRed("auth user id"), id);
   const user = await User.findById(id);
   if (!user) throw new Error("User not found", { cause: 404 });
+
   res.json({ data: user });
 };
 
@@ -37,4 +39,7 @@ const deleteUser = async (req, res) => {
   res.json({ data: user });
 };
 
+
+
 export { createUser, getAllUsers, getOneUser, updateOneUser, deleteUser };
+

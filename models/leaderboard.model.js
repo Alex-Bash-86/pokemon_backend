@@ -5,11 +5,17 @@ const leaderboardSchema = new Schema({
   username: {
     type: String,
     required: true,
+
     trim: true
   },
+
   score: {
     type: Number,
-    required: true
+    required: true,
+       trim: true,
+     unique: true,
+    default: 0,
+     
   },
   date: {
     type: Date,
